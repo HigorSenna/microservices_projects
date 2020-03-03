@@ -1,3 +1,4 @@
 br/com/microservices/core/repository/CourseRepository.class
 br/com/microservices/core/model/Course.class
+br/com/microservices/core/model/ApplicationUser.class
 br/com/microservices/core/model/AbstractEntity.class

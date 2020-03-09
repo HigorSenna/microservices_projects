@@ -27,6 +27,12 @@
 
     <dependencies>
         <dependency>
+            <!--Tem as mesmas funcionalidades do JWT, porem com algumas coisas a mais, como por ex: criptografia do token-->
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>7.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>

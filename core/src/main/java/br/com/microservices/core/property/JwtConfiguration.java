@@ -1,6 +1,5 @@
 package br.com.microservices.core.property;
 
-import com.netflix.ribbon.proxy.annotation.Http;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

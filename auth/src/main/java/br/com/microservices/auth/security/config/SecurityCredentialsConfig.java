@@ -1,5 +1,6 @@
 package br.com.microservices.auth.security.config;
 
+import br.com.microservices.auth.security.filter.JwtUsernameAndPasswordAuthenticationFilter;
 import br.com.microservices.core.property.JwtConfiguration;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
 import javax.servlet.http.HttpServletResponse;
@@ -30,7 +30,7 @@ public class SecurityCredentialsConfig extends WebSecurityConfigurerAdapter {
                 .configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
                                      .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                                      .and().exceptionHandling().authenticationEntryPoint((req, res,e) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED))
-                                     .and().addFilter(new UsernamePasswordAuthenticationFilter())
+                                     .and().addFilter(new JwtUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtConfiguration))
                 .authorizeRequests().antMatchers(jwtConfiguration.getLoginUrl()).permitAll()
                 .antMatchers("/course/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated();

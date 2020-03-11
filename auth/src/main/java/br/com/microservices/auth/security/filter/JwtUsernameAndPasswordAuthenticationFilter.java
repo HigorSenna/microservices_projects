@@ -2,7 +2,7 @@ package br.com.microservices.auth.security.filter;
 
 import br.com.microservices.core.model.ApplicationUser;
 import br.com.microservices.core.property.JwtConfiguration;
-import br.com.microservices.token.security.creator.TokenCreator;
+import br.com.microservices.token.creator.TokenCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jwt.SignedJWT;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +16,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.Collections;
 
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
@@ -53,7 +51,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
     //TODO: Ver o curso do devdojo de SpringBoot Essentials(para aprender mais sobre autenticacao)
     @Override
     @SneakyThrows
-    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication auth) throws IOException, ServletException {
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication auth) {
         log.info("Autenticacao bem sucedida para o usuario '{}', gerando JWE token", auth.getName());
 
         SignedJWT signedJWS = tokenCreator.createSignedJWS(auth);

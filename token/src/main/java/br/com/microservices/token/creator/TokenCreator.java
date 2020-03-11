@@ -1,4 +1,4 @@
-package br.com.microservices.token.security.creator;
+package br.com.microservices.token.creator;
 
 import br.com.microservices.core.model.ApplicationUser;
 import br.com.microservices.core.property.JwtConfiguration;
@@ -31,7 +31,6 @@ import static java.util.stream.Collectors.toList;
 public class TokenCreator {
 
     private final JwtConfiguration jwtConfiguration;
-
 
     //    (JWS) = Json Web Signed
     @SneakyThrows

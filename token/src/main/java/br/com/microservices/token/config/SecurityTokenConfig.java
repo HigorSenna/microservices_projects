@@ -1,4 +1,4 @@
-package br.com.microservices.token.security.config;
+package br.com.microservices.token.config;
 
 import br.com.microservices.core.property.JwtConfiguration;
 import lombok.RequiredArgsConstructor;
@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.cors.CorsConfiguration;
 
 import javax.servlet.http.HttpServletResponse;
@@ -16,8 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class SecurityTokenConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtConfiguration jwtConfiguration;
-    private final UserDetailsService userDetailsService;
+    protected final JwtConfiguration jwtConfiguration;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

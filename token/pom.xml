@@ -12,6 +12,7 @@
     <description>SpringBoot Microservices Project - Token Generation</description>
 
     <artifactId>token</artifactId>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>11</java.version>

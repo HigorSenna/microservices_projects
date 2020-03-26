@@ -2,7 +2,7 @@ package br.com.microservices.auth.security.filter;
 
 import br.com.microservices.core.model.ApplicationUser;
 import br.com.microservices.core.property.JwtConfiguration;
-import br.com.microservices.token.creator.TokenCreator;
+import br.com.microservices.security.token.creator.TokenCreator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jwt.SignedJWT;
 import lombok.RequiredArgsConstructor;
@@ -54,7 +54,7 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication auth) {
         log.info("Autenticacao bem sucedida para o usuario '{}', gerando JWE token", auth.getName());
 
-        SignedJWT signedJWS = tokenCreator.createSignedJWS(auth);
+        SignedJWT signedJWS = tokenCreator.createSignedJWT(auth);
         String encryptedToken = tokenCreator.encryptToken(signedJWS);
         log.info("Token gerado com sucesso, adicionando no header de resposta");
 

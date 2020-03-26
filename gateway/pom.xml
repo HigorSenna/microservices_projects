@@ -5,7 +5,7 @@
     <parent>
         <artifactId>microservices_projects</artifactId>
         <groupId>br.com.microservices</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
 
@@ -15,7 +15,7 @@
 
     <properties>
         <java.version>11</java.version>
-        <core.version>0.0.1-SNAPSHOT</core.version>
+        <core.version>1.0-SNAPSHOT</core.version>
     </properties>
 
     <dependencies>

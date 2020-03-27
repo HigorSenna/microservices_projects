@@ -2,10 +2,12 @@ package br.com.microservices.security.filter;
 
 import br.com.microservices.core.property.JwtConfiguration;
 import br.com.microservices.security.token.converter.TokenConverter;
+import br.com.microservices.security.util.SecurityContextUtil;
 import com.nimbusds.jwt.SignedJWT;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -19,8 +21,8 @@ import java.io.IOException;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class JwtTokenAuthorizationFilter extends OncePerRequestFilter {
 
-    private final JwtConfiguration jwtConfiguration;
-    private final TokenConverter tokenConverter;
+    protected final JwtConfiguration jwtConfiguration;
+    protected final TokenConverter tokenConverter;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
@@ -31,8 +33,16 @@ public class JwtTokenAuthorizationFilter extends OncePerRequestFilter {
         }
 
         String token = header.replace(jwtConfiguration.getHeader().getPrefix(), "").trim();
+        SecurityContextUtil.setSecurityContext(getSignedToken(token));
 
-        
+        chain.doFilter(request, response);
+    }
+
+    private SignedJWT getSignedToken(String token) {
+        if(StringUtils.equalsAnyIgnoreCase("signed", jwtConfiguration.getType())) {
+            return validate(token);
+        }
+        return decryptValidating(token);
     }
 
     @SneakyThrows
